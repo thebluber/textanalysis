@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="bootstrap.css">
+    <script src="script.js"></script>
+  </head>
+  
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <h1 class="page-header">Simple Text Analysis Tool 4 Baby</h1>
+        </div>
+
+        <div class="span8">
+          <form class="well" id="form" action="/display_results" method="post" enctype="multipart/form-data">
+            <label>Choose a text file (requirements: utf-8, segmented) and the amount of results:</label>
+            <input class="span2" type="file" name="file" required="required"/>
+            <select name="select_n" class="span1" form="form">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+            </select>
+          <br/>
+            <input type="submit" class="btn btn-primary" value="Upload"/>
+          </form>
+        </div>
+        
+        <div class="span8">
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

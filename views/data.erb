@@ -1,0 +1,38 @@
+<div class="span8">
+   <form class="well" id="form" action="/display_results" method="post" enctype="multipart/form-data">
+      <label>Choose a text file (requirements: utf-8, segmented) and the amount of results:</label>
+   <input type="file" class="span2" required="required" name="file"/>
+            <select name="select_n" class="span1" form="form">
+              <option value="10">10</option>
+              <option value="20">20</option>
+              <option value="30">30</option>
+              <option value="40">40</option>
+              <option value="50">50</option>
+            </select>
+   <br/>
+   <button type="submit" class="btn btn-primary">Upload</button>
+   </form>
+</div>
+
+<div class="span8">
+  <h3>Results for <%= @title %> (total length: <%= @total_length%>)</h3>
+  <table class="table table-striped">
+      <tr>
+        <td></td>
+        <td>WORD</td>
+        <td>ABSOLUTE FREQUENCY</td>
+        <td>RELATIVE FREQUENCY IN %</td>
+      </tr>
+    <% i = 1 %>
+    <% @data.each do |d| %>
+      <tr>
+        <td><%= i %></td>
+        <td><%= d[0] %></td>
+        <td><%= d[1] %></td>
+        <td><%= d[2] %></td>
+      </tr>
+      <% i += 1 %>
+    <% end %>
+  </table>
+  <a href="<%= url "/download" %>" class="btn btn-success">Download</a>
+</div>
