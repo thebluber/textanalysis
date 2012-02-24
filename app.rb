@@ -57,7 +57,7 @@ get "/download" do
 end
 
 get "/alt" do
-  text = Text.new(open("public/schloss.txt"))
+  text = Text.new(open("schloss.txt"))
   @data = text.show(20)
   file = open("public/results.txt", "w")
     file.puts "WORD\tABSOLUTE FREQUENCY\tRELATIVE FREQUENCY\n"
