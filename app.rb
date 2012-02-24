@@ -1,7 +1,7 @@
 #encoding:utf-8
 require "sinatra"
-require ".models/text.rb"
-require ".config/db.rb"
+require "./models/text.rb"
+require "./config/db.rb"
 
 get "/" do
   redirect to "index.html"
@@ -17,10 +17,11 @@ post "/display_results" do
     return
   end
   n = params[:select_n].to_i
-  text = Text.create(:title => file[:filename], :text => file[:tempfile]
+  textdata = file[:tempfile].read.force_encoding("utf-8")
+  text = TextAnalysis.create(:title => file[:filename], :text => textdata)
   @data = text.show(n)
   @title = file[:filename]
-  @total_length = text.w_list.length
+  @total_length = text.list.length
   erb :data
 end
 
@@ -29,9 +30,9 @@ get "/download" do
 end
 
 get "/example" do
-  text = Text.new(open("schloss.txt"))
+  text = TextAnalysis.new(open("schloss.txt"))
   @data = text.show(20)
   @title = "Das Schloss"
-  @total_length = text.w_list.length
+  @total_length = text.list.length
   erb :data  
 end
