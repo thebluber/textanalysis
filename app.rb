@@ -43,7 +43,7 @@ post "/display_results" do
   n = params[:select_n].to_i
   text = Text.new(file[:tempfile])
   @data = text.show(n)
-  download_f = open("public/results.txt", "w")
+  download_f = open("results.txt", "w")
     download_f.puts "WORD\tABSOLUTE FREQUENCY\tRELATIVE FREQUENCY\n"
     @data.each{|d| download_f.puts "#{d[0]}\t#{d[1]}\t#{d[2]}\n"}
     download_f.close
@@ -59,7 +59,7 @@ end
 get "/alt" do
   text = Text.new(open("schloss.txt"))
   @data = text.show(20)
-  file = open("public/results.txt", "w")
+  file = open("results.txt", "w")
     file.puts "WORD\tABSOLUTE FREQUENCY\tRELATIVE FREQUENCY\n"
     @data.each{|d| file.puts "#{d[0]}\t#{d[1]}\t#{d[2]}\n"}
     file.close
