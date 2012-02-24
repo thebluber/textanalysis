@@ -1,5 +1,7 @@
 #encoding:utf-8
 require "sinatra"
+require ".models/text.rb"
+require ".config/db.rb"
 
 class Text
   attr_accessor :text, :w_list, :frequency
@@ -41,12 +43,8 @@ post "/display_results" do
     return
   end
   n = params[:select_n].to_i
-  text = Text.new(file[:tempfile])
+  text = Text.create(:title => file[:filename], :text => file[:tempfile]
   @data = text.show(n)
-  download_f = open("results.txt", "w")
-    download_f.puts "WORD\tABSOLUTE FREQUENCY\tRELATIVE FREQUENCY\n"
-    @data.each{|d| download_f.puts "#{d[0]}\t#{d[1]}\t#{d[2]}\n"}
-    download_f.close
   @title = file[:filename]
   @total_length = text.w_list.length
   erb :data
