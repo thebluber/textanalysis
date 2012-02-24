@@ -2,10 +2,9 @@
 require "sinatra"
 
 class Text
-  attr_accessor :title, :text, :w_list, :frequency
+  attr_accessor :text, :w_list, :frequency
   def initialize(file)
-    @title = file[:filename]
-    @text = file[:tempfile].read.force_encoding("utf-8")
+    @text = file.read.force_encoding("utf-8")
     @w_list = @text.split.map(&:downcase).map{|w| w.gsub(/\p{Punct}/, "")}.reject{|i| i == ""}
     @frequency = self.count_rel.reverse
   end
@@ -42,7 +41,7 @@ post "/display_results" do
     return
   end
   n = params[:select_n].to_i
-  text = Text.new(file)
+  text = Text.new(file[:tempfile])
   @data = text.show(n)
   download_f = open("public/results.txt", "w")
     download_f.puts "WORD\tABSOLUTE FREQUENCY\tRELATIVE FREQUENCY\n"
@@ -57,3 +56,14 @@ get "/download" do
   redirect to "results.txt"
 end
 
+get "/alt" do
+  text = Text.new(open("public/schloss.txt"))
+  @data = text.show(20)
+  file = open("public/results.txt", "w")
+    file.puts "WORD\tABSOLUTE FREQUENCY\tRELATIVE FREQUENCY\n"
+    @data.each{|d| file.puts "#{d[0]}\t#{d[1]}\t#{d[2]}\n"}
+    file.close
+  @title = "Das Schloss"
+  @total_length = text.w_list.length
+  erb :data  
+end

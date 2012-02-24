@@ -14,20 +14,32 @@
         </div>
 
         <div class="span8">
-          <form class="well" id="form" action="/display_results" method="post" enctype="multipart/form-data">
-            <label>Choose a text file (requirements: utf-8, segmented) and the amount of results:</label>
-            <input class="span2" type="file" name="file" required="required"/>
-            <select name="select_n" class="span1" form="form">
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-              <option value="50">50</option>
-            </select>
-          <br/>
-            <input type="submit" class="btn btn-primary" value="Upload"/>
-          </form>
-        </div>
+          <form class="well form-horizontal" id="form" action="/display_results" method="post" enctype="multipart/form-data">
+            <fieldset>
+              <legend>Choose a text file and the amount of results:</legend>
+                <div class="control-group">
+                  <input type="file" name="file" required="required" id="f"/>
+                  <select name="select_n" class="span1" form="form">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                  </select>
+                  <p class="help-block">chinese or japanese texts should be segmented and in utf-8!</p>
+                  <input type="submit" class="btn btn-primary" value="Upload"/>
+                </div>
+           </fieldset>
+         </form>
+         <form class="form-horizontal" action="/alt" method="get">
+           <fieldset>
+            <div class="control-group">
+              <input type="submit" class="btn btn-success" value="Try out!"/>
+              <p class="help-block">Example: Das Schloss by Franz Kafka</p>
+            </div>
+           </fieldset>
+         </form>
+       </div>
         
         <div class="span8">
         </div>

@@ -1,21 +1,27 @@
-<div class="span8">
-   <form class="well" id="form" action="/display_results" method="post" enctype="multipart/form-data">
-      <label>Choose a text file (requirements: utf-8, segmented) and the amount of results:</label>
-   <input type="file" class="span2" required="required" name="file"/>
-            <select name="select_n" class="span1" form="form">
-              <option value="10">10</option>
-              <option value="20">20</option>
-              <option value="30">30</option>
-              <option value="40">40</option>
-              <option value="50">50</option>
-            </select>
-   <br/>
-   <button type="submit" class="btn btn-primary">Upload</button>
-   </form>
-</div>
+        <div class="span8">
+          <form class="well form-horizontal" id="form" action="/display_results" method="post" enctype="multipart/form-data">
+            <fieldset>
+              <legend>Choose a text file and the amount of results:</legend>
+                <div class="control-group">
+                  <input type="file" name="file" required="required" id="f"/>
+                  <select name="select_n" class="span1" form="form">
+                    <option value="10">10</option>
+                    <option value="20">20</option>
+                    <option value="30">30</option>
+                    <option value="40">40</option>
+                    <option value="50">50</option>
+                  </select>
+                  <p class="help-block">chinese or japanese texts should be segmented and in utf-8!</p>
+                  <input type="submit" class="btn btn-primary" value="Upload"/>
+                </div>
+           </fieldset>
+         </form>
+       </div>
+        
 
 <div class="span8">
   <h3>Results for <%= @title %> (total length: <%= @total_length%>)</h3>
+  <h4><a href="<%= url "/download" %>" class="pull-right">download results</a></h4>
   <table class="table table-striped">
       <tr>
         <td></td>
@@ -34,5 +40,4 @@
       <% i += 1 %>
     <% end %>
   </table>
-  <a href="<%= url "/download" %>" class="btn btn-success">Download</a>
 </div>
